@@ -1,5 +1,5 @@
 <?php
-function testviews_schema(){
+function testentity_schema(){
   $tables = array();
   $tables['testentity'] = array(
     'description' => 'A table who will be exposed to views',
