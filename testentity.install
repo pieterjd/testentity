@@ -1,0 +1,44 @@
+<?php
+function testviews_schema(){
+  $tables = array();
+  $tables['testentity'] = array(
+    'description' => 'A table who will be exposed to views',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary key of the table',
+        'type' => 'serial',
+        'not null' => TRUE,  
+      ),
+      'loan_time' => array(
+        'description' => 'Date and time of the loan',
+        'type' => 'int',
+        'not null' => TRUE,  
+      ),
+      'expected_return' => array(
+        'description' => 'Expected return date and time',
+        'type' => 'int',
+        'not null' => TRUE,  
+      ),
+      'observed_return' => array(
+        'description' => 'The real return date and time',
+        'type' => 'int',
+        'not null' => FALSE,  
+      ),
+      'nid' => array(
+        'description' => 'Node id of the lent item',
+        'type' => 'int',
+        'not null' => TRUE,  
+      ),
+      'uid' => array(
+        'description' => 'User id of loander',
+        'type' => 'int',
+        'not null' => TRUE,  
+      ),
+    ),
+    'primary key' => array(
+      'id',
+    ),
+  );
+  return $tables;
+
+}
