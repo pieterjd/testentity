@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * Implements hook_entity_info().
+ */
+function testentity_entity_info() {
+  $entities = array();
+
+  $entities['testentity'] => array(
+    'label' => t('Test Entity'),
+    'plural label' => t('Test Entities'),
+    'entity class' => 'Entity',
+    'controller class' => 'EntityAPIController',
+    'base table' => 'entity_test',
+    'entity keys' => array(
+      'id' => 'id',
+    ),
+    // Use the default label() and uri() functions
+    'label callback' => 'entity_class_label',
+    'uri callback' => 'entity_class_uri',
+  );
+  return $entities;
+}
+
