@@ -6,19 +6,68 @@
 function testentity_entity_info() {
   $entities = array();
 
-  $entities['testentity'] => array(
+  $entities['testentity'] = array(
     'label' => t('Test Entity'),
     'plural label' => t('Test Entities'),
     'entity class' => 'Entity',
     'controller class' => 'EntityAPIController',
-    'base table' => 'entity_test',
+    'fieldable' => TRUE,
+    'base table' => 'testentity',
     'entity keys' => array(
       'id' => 'id',
     ),
     // Use the default label() and uri() functions
     'label callback' => 'entity_class_label',
     'uri callback' => 'entity_class_uri',
+    //next lines based on http://www.bluespark.com/blog/drupal-entities-part-3-programming-hello-drupal-entity
+    'bundles' => array(
+      'bundle1' => array(
+        'label' => 'Bundle 1',
+        'admin' => array(
+          'path' => 'admin/structure/bundle1/manage',
+          'access arguments' => array('administer modules'),
+        ),
+      ),
+    
+    ),
+    
+    'view modes' => array(
+      'full' => array(
+        'label' => t('Full Bundle 1'),
+        'custom settings' =>  FALSE,
+      ),
+    )
+    
   );
   return $entities;
+}
+
+/**
+* implements hook_menu().
+*/
+
+function testentity_menu(){
+  $menu['admin/structure/bundle1/manage'] = array(
+    'title' => t('Bundle 1 Manage Page'),
+    'page callback' => 'testentity_bundle1_manage',
+    'access arguments' => array('administer modules'),
+  );
+  
+  return $menu;
+}
+
+/**
+* Menu callback function.
+*/
+function testentity_bundle1_manage(){
+  return t('Welcome to the bundle 1 Management page');
+}
+/**
+* Implements hook_view_api.
+*/
+function testentity_views_api(){
+  return array(
+    'api' => 3,
+  );
 }
 
